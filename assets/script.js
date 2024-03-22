@@ -3,11 +3,11 @@ let segundos = 60
 let horas = 0
 let milliseconds = 0;
 let idIntervalo;
-let tempoModorodoPadrao = 1
+let tempoModorodoPadrao = 25
 let tempoDescansoPadrao = 5
 let digitalContador = document.getElementById('contador')
-const apiUrl = 'https://api.api-ninjas.com/v1/exercises'
-const apiKey = 'Lnag8JbVMoTkvuKrLjejsw==V89esMtCr0Z2qNPb'
+const url = 'https://api.api-ninjas.com/v1/exercises?type=stretching'
+const apiKey = 'VA862GwnFzy6f3qr0pXQrg==LOGy16CvMPVjza2R';
 let response
 
 
@@ -50,40 +50,46 @@ function formatarContador(numero) {
 }
 
 async function pegarExercicios() {
-    const queryParams = {
-        type: 'stretching',
+    // const queryParams = {
+    //     type: 'stretching',
+    // }
+
+    // const queryString = new URLSearchParams(queryParams).toString()
+
+    // const UrlCompleta = `${apiUrl}?${queryString}`
+
+    // try {
+    //     resposta = await fetch(UrlCompleta, {
+    //         method: 'GET',
+    //         headers: {
+    //             Authorization: `X-Api-Key ${apiKey}`,
+    //         },
+    //     })
+
+    //     if (resposta.status != 200) {
+    //         throw new Error('Network response was not ok');
+    //     }
+
+    //     console.log(response.json())
+
+    // } catch (error) {
+    //     console.log(error)
+    // }
+
+
+    let options = {
+        method: 'GET',
+        headers: { 'x-api-key': apiKey }
     }
 
-    const queryString = new URLSearchParams(queryParams).toString()
 
-    const UrlCompleta = `${apiUrl}?${queryString}`
+    fetch(url, options)
+        .then(res => res.json()) // parse response as JSON
+        .then(data => {
+            console.log(data)
 
-    try {
-        resposta = await fetch(UrlCompleta, {
-            method: 'GET',
-            headers: {
-                "X-Auth-Token": apiKey
-            },
-            contentType: 'application/json'
         })
-
-        if (resposta.status != 200) {
-            throw new Error('Network response was not ok');
-        }
-
-        console.log(response.json())
-
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-function configurarTempo(){
-    let divElementosConfigurar = document.querySelector('.config');
-
-    if (divElementosConfigurar.style.display === 'none') {
-        divElementosConfigurar.style.display = 'block';
-      } else {
-        divElementosConfigurar.style.display = 'none';
-      }
+        .catch(err => {
+            console.log(`error ${err}`)
+        });
 }
