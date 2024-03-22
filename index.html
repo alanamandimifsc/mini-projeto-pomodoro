@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/style.css">
+    <title>Pomodoro</title>
+</head>
+
+<body>
+    <div class="main">
+        <div class="digital">
+            <span id="contador">25:00</span>
+        </div>
+
+        <div class="config">
+            <label>Tempo de Atividade</label>
+            <input type="number"> <span>horas</span>
+            
+        </div>
+
+        <div class="buttons">
+            <button class="button" id="iniciar" onclick="iniciarPomodoro()">Iniciar</button>
+            <button class="button" id="parar" onclick="pararPomodoro()">Parar</button>
+            <button class="button" id="zerar" onclick="zerarPomodoro()">Zerar Tempo</button>
+        </div>
+    </div>
+
+
+    <script src="./assets/script.js"></script>
+</body>
+
+</html>
