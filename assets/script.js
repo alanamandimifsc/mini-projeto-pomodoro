@@ -49,32 +49,6 @@ function formatarContador(numero) {
 }
 
 async function pegarExercicios() {
-    // const queryParams = {
-    //     type: 'stretching',
-    // }
-
-    // const queryString = new URLSearchParams(queryParams).toString()
-
-    // const UrlCompleta = `${apiUrl}?${queryString}`
-
-    // try {
-    //     resposta = await fetch(UrlCompleta, {
-    //         method: 'GET',
-    //         headers: {
-    //             Authorization: `X-Api-Key ${apiKey}`,
-    //         },
-    //     })
-
-    //     if (resposta.status != 200) {
-    //         throw new Error('Network response was not ok');
-    //     }
-
-    //     console.log(response.json())
-
-    // } catch (error) {
-    //     console.log(error)
-    // }
-
 
     let options = {
         method: 'GET',
