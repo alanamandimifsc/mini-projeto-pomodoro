@@ -6,8 +6,8 @@ let idIntervalo;
 let tempoModorodoPadrao = 25
 let tempoDescansoPadrao = 5
 let digitalContador = document.getElementById('contador')
-const apiUrl = 'https://api.api-ninjas.com/v1/exercises'
-const apiKey = 'API-KEY'
+const url = 'https://api.api-ninjas.com/v1/exercises?type=stretching'
+const apiKey = 'VA862GwnFzy6f3qr0pXQrg==LOGy16CvMPVjza2R';
 let response
 
 
@@ -49,29 +49,46 @@ function formatarContador(numero) {
 }
 
 async function pegarExercicios() {
-    const queryParams = {
-        type: 'stretching',
+    // const queryParams = {
+    //     type: 'stretching',
+    // }
+
+    // const queryString = new URLSearchParams(queryParams).toString()
+
+    // const UrlCompleta = `${apiUrl}?${queryString}`
+
+    // try {
+    //     resposta = await fetch(UrlCompleta, {
+    //         method: 'GET',
+    //         headers: {
+    //             Authorization: `X-Api-Key ${apiKey}`,
+    //         },
+    //     })
+
+    //     if (resposta.status != 200) {
+    //         throw new Error('Network response was not ok');
+    //     }
+
+    //     console.log(response.json())
+
+    // } catch (error) {
+    //     console.log(error)
+    // }
+
+
+    let options = {
+        method: 'GET',
+        headers: { 'x-api-key': apiKey }
     }
 
-    const queryString = new URLSearchParams(queryParams).toString()
 
-    const UrlCompleta = `${apiUrl}?${queryString}`
+    fetch(url, options)
+        .then(res => res.json()) // parse response as JSON
+        .then(data => {
+            console.log(data)
 
-    try {
-        resposta = await fetch(UrlCompleta, {
-            method: 'GET',
-            headers: {
-                Authorization: `X-Api-Key ${apiKey}`,
-            },
         })
-
-        if (resposta.status != 200) {
-            throw new Error('Network response was not ok');
-        }
-
-        console.log(response.json())
-
-    } catch (error) {
-        console.log(error)
-    }
+        .catch(err => {
+            console.log(`error ${err}`)
+        });
 }
