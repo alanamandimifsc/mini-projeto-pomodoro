@@ -3,11 +3,11 @@ let segundos = 60
 let horas = 0
 let milliseconds = 0;
 let idIntervalo;
-let tempoModorodoPadrao = 25
+let tempoModorodoPadrao = 1
 let tempoDescansoPadrao = 5
 let digitalContador = document.getElementById('contador')
 const apiUrl = 'https://api.api-ninjas.com/v1/exercises'
-const apiKey = 'API-KEY'
+const apiKey = 'Lnag8JbVMoTkvuKrLjejsw==V89esMtCr0Z2qNPb'
 let response
 
 
@@ -41,6 +41,7 @@ function contadorTempo() {
 
     if (minutos === 0 & segundos === 0) {
         pegarExercicios()
+        clearInterval(idIntervalo)
     }
 }
 
@@ -61,8 +62,9 @@ async function pegarExercicios() {
         resposta = await fetch(UrlCompleta, {
             method: 'GET',
             headers: {
-                Authorization: `X-Api-Key ${apiKey}`,
+                "X-Auth-Token": apiKey
             },
+            contentType: 'application/json'
         })
 
         if (resposta.status != 200) {
@@ -74,4 +76,14 @@ async function pegarExercicios() {
     } catch (error) {
         console.log(error)
     }
+}
+
+function configurarTempo(){
+    let divElementosConfigurar = document.querySelector('.config');
+
+    if (divElementosConfigurar.style.display === 'none') {
+        divElementosConfigurar.style.display = 'block';
+      } else {
+        divElementosConfigurar.style.display = 'none';
+      }
 }

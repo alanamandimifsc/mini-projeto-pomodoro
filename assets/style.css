@@ -21,10 +21,11 @@ body {
 .digital{ 
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     color:rgb(253, 253, 253); 
     font-size:50px; 
-    margin:10px auto;
+    margin-bottom: 50px;
     border : 5px solid rgb(82, 156, 86);
     border-radius:50%;
     width:200px;
@@ -40,7 +41,8 @@ body {
 
 .config{
     display: flex;
-    margin: 25px;
+    margin-bottom: 25px;
+    margin-top: none;
 }
 
 .config label{
@@ -112,4 +114,10 @@ body {
         height: 300px;
       }
     }
+  }
+
+  .btnConfig{
+    margin-top: 50px;
+    background-color: Transparent;
+    border: none;
   }
