@@ -73,7 +73,7 @@ function formatarContador(numero) {
     return numero < 10 ? `0${numero}` : numero;
 }
 
-async function pegarExercicios() {
+function pegarExercicios() {
     const url = 'https://api.api-ninjas.com/v1/exercises?type=stretching'
     const apiKey = 'VA862GwnFzy6f3qr0pXQrg==LOGy16CvMPVjza2R';
 
@@ -91,20 +91,7 @@ async function pegarExercicios() {
         headers: { 'X-Api-key': apiKey }
     }
 
-    try {
-        resposta = await fetch(UrlCompleta, options)
-
-        if (resposta.status != 200) {
-            throw new Error('Network response was not ok');
-        }
-
-        console.log(response.json())
-
-    } catch (error) {
-        console.log(error)
-    }
-
-    fetch(url, options)
+    fetch(UrlCompleta, options)
         .then(res => res.json()) // parse response as JSON
         .then(data => {
             console.log(data)
