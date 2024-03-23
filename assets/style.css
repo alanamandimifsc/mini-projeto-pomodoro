@@ -35,9 +35,51 @@ body {
 }
 
 .historico {
- display: flex;
- justify-content:center;
+  display: flex;
+  justify-content:center;
+ 
+ }
 
+.digital{ 
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    color:rgb(253, 253, 253); 
+    font-size:50px; 
+    margin-bottom: 50px;
+    border : 5px solid rgb(82, 156, 86);
+    border-radius:50%;
+    width:200px;
+    height:200px;
+    overflow:hidden;
+    position:relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor:default;
+  }
+
+.contador{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}  
+
+.btnConfig{
+  margin-top: 40px;
+  background-color: Transparent;
+  border: none;
+}
+
+.config{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 25px;
+    margin-top: none;
 }
 
 .digital {
