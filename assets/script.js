@@ -1,32 +1,42 @@
 let minutos = 0
 let segundos = 60
-let horas = 0
-let milliseconds = 0;
 let idIntervalo;
-let tempoModorodoPadrao = 25
+let tempoPomodoroPadrao = 1
 let tempoDescansoPadrao = 5
 let digitalContador = document.getElementById('contador')
-const url = 'https://api.api-ninjas.com/v1/exercises?type=stretching'
-const apiKey = 'VA862GwnFzy6f3qr0pXQrg==LOGy16CvMPVjza2R';
+let labelMinuto = document.getElementById('minutos')
+let labelSegundo = document.getElementById('segundos')
+const comboTempoPomodoro = document.getElementById('cbTempo')
+const btnIniciar = document.getElementById('iniciar')
+let tempoSelecionado
 let response
+let exercicios = []
 
 
 function iniciarPomodoro() {
-    minutos = tempoModorodoPadrao
+    if(tempoSelecionado === undefined){
+        minutos = tempoPomodoroPadrao
+    }else {
+        minutos = parseInt(tempoSelecionado)
+    }
+
     minutos--
-    idIntervalo = setInterval(contadorTempo, 1000)
+    btnIniciar.setAttribute('disabled', 'disabled')
+    idIntervalo = setInterval(contadorTempo, 1000)  
 }
 
 function pararPomodoro() {
+    btnIniciar.removeAttribute('disabled')
     clearInterval(idIntervalo)
 }
 
 function zerarPomodoro() {
+    btnIniciar.removeAttribute('disabled')
     clearInterval(idIntervalo)
-    digitalContador.innerText = '25:00'
+    labelMinuto.innerText = tempoSelecionado != undefined ? tempoSelecionado : tempoPomodoroPadrao
+    labelSegundo.innerText = formatarContador('0')
     minutos = 0
     segundos = 60
-    horas = 0
 }
 
 function contadorTempo() {
@@ -37,55 +47,65 @@ function contadorTempo() {
         segundos--
     }
 
-    digitalContador.innerText = formatarContador(minutos) + `:` + formatarContador(segundos)
+    labelMinuto.innerText = formatarContador(minutos)
+    labelSegundo.innerText = formatarContador(segundos)
 
-    if (minutos === 0 & segundos === 0) {
+
+    if (minutos == 0 & segundos == 0) {
         pegarExercicios()
+        clearInterval(idIntervalo)
     }
+}
+
+function configurarTempo() {
+    const divElementosConfigurar = document.querySelector('.config');
+
+    if (divElementosConfigurar.style.display === 'none') {
+        divElementosConfigurar.style.display = 'block';
+    } else {
+        divElementosConfigurar.style.display = 'none';
+    }
+}
+
+function selecionarTempoPomodoro() {
+    tempoSelecionado = comboTempoPomodoro.value
+    labelMinuto.innerText = tempoSelecionado
+    labelSegundo.innerText = '00'
 }
 
 function formatarContador(numero) {
     return numero < 10 ? `0${numero}` : numero;
 }
 
-async function pegarExercicios() {
-    // const queryParams = {
-    //     type: 'stretching',
-    // }
+function pegarExercicios() {
+    const url = 'https://api.api-ninjas.com/v1/exercises'
+    const apiKey = 'VA862GwnFzy6f3qr0pXQrg==LOGy16CvMPVjza2R';
 
-    // const queryString = new URLSearchParams(queryParams).toString()
+    const queryParams = {
+        type: 'stretching',
+    }
 
-    // const UrlCompleta = `${apiUrl}?${queryString}`
+    const queryString = new URLSearchParams(queryParams).toString()
 
-    // try {
-    //     resposta = await fetch(UrlCompleta, {
-    //         method: 'GET',
-    //         headers: {
-    //             Authorization: `X-Api-Key ${apiKey}`,
-    //         },
-    //     })
-
-    //     if (resposta.status != 200) {
-    //         throw new Error('Network response was not ok');
-    //     }
-
-    //     console.log(response.json())
-
-    // } catch (error) {
-    //     console.log(error)
-    // }
+    const UrlCompleta = `${url}?${queryString}`
 
 
     let options = {
         method: 'GET',
-        headers: { 'x-api-key': apiKey }
+        headers: { 'X-Api-key': apiKey }
     }
 
-
-    fetch(url, options)
+    fetch(UrlCompleta, options)
         .then(res => res.json()) // parse response as JSON
         .then(data => {
             console.log(data)
+          
+            const exerciciosFiltrados = data.reduce((acc, cur) => {
+                acc.push({ nomeExercicio: cur.name, Instrucao: cur.instructions });
+                return acc;
+            }, []);
+            
+            console.log(exerciciosFiltrados);
 
         })
         .catch(err => {
