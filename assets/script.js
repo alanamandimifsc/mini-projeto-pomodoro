@@ -6,14 +6,17 @@ let idIntervalo;
 let tempoModorodoPadrao = 25
 let tempoDescansoPadrao = 5
 let digitalContador = document.getElementById('contador')
-const url = 'https://api.api-ninjas.com/v1/exercises?type=stretching'
+let offset = 0;
+const url = "https://api.api-ninjas.com/v1/exercises?type=stretching&offset=" + offset;;
 const apiKey = 'VA862GwnFzy6f3qr0pXQrg==LOGy16CvMPVjza2R';
-let response
+let listaExercicios = [];
+let count = 0;
 
 
 function iniciarPomodoro() {
-    minutos = tempoModorodoPadrao
-    minutos--
+    segundos = 5;
+    // minutos = tempoModorodoPadrao-1
+    // minutos--
     idIntervalo = setInterval(contadorTempo, 1000)
 }
 
@@ -31,16 +34,17 @@ function zerarPomodoro() {
 
 function contadorTempo() {
     if (segundos === 0) {
-        minutos--
+        minutos--;
         segundos = 59
     } else {
-        segundos--
+        segundos--;
     }
 
     digitalContador.innerText = formatarContador(minutos) + `:` + formatarContador(segundos)
 
     if (minutos === 0 & segundos === 0) {
-        pegarExercicios()
+        exibeExercicios();
+        clearInterval(idIntervalo);
     }
 }
 
@@ -48,19 +52,31 @@ function formatarContador(numero) {
     return numero < 10 ? `0${numero}` : numero;
 }
 
-async function pegarExercicios() {
+
+function exibeExercicios() {
+    let lista = document.querySelector('#lista-exercicios');
+    let listaExerc = document.createElement('li');
+    listaExerc.classList.add('exercicio-item');
+    listaExerc.innerText = `Name: ${listaExercicios[count].name}\nMuscle: ${listaExercicios[count].muscle}\nDifficulty: ${listaExercicios[count].difficulty}\nInstructions: ${listaExercicios[count].instructions}`;
+    lista.appendChild(listaExerc);
+    count++;
+
+}
+
+function pegarExercicios() {
 
     let options = {
         method: 'GET',
-        headers: { 'x-api-key': apiKey }
+        headers: { 'x-api-key': apiKey },
+        contentType: 'application/json'
     }
 
 
     fetch(url, options)
         .then(res => res.json()) // parse response as JSON
         .then(data => {
-            console.log(data)
-
+            listaExercicios = data;
+            console.log(listaExercicios);
         })
         .catch(err => {
             console.log(`error ${err}`)

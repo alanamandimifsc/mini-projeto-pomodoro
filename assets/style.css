@@ -8,6 +8,21 @@ body {
   height: 100vh;
   font-family: 'Rubik', sans-serif;
   background-color: darkseagreen;
+
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 2.5rem;
+}
+
+.atividade {
+  display: none;
+  display: flex;
+  height: 100%;
+  /* margin: 2.5rem; */
 }
 
 .main {
@@ -16,49 +31,57 @@ body {
   align-items: center;
   flex-direction: column;
   height: 100%;
+
 }
 
-.digital{ 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color:rgb(253, 253, 253); 
-    font-size:50px; 
-    margin:10px auto;
-    border : 5px solid rgb(82, 156, 86);
-    border-radius:50%;
-    width:200px;
-    height:200px;
-    overflow:hidden;
-    position:relative;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor:default;
-  }
+.historico {
+ display: flex;
+ justify-content:center;
 
-.config{
-    display: flex;
-    margin: 25px;
 }
 
-.config label{
-    margin-right: 3px;
+.digital {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(253, 253, 253);
+  font-size: 50px;
+  margin: 10px auto;
+  border: 5px solid rgb(82, 156, 86);
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
 }
 
-.config input{
-    width: 50px;
+.config {
+  display: flex;
+  margin: 25px;
 }
 
-.config span{
-    margin-left: 5px;
+.config label {
+  margin-right: 3px;
+}
+
+.config input {
+  width: 50px;
+}
+
+.config span {
+  margin-left: 5px;
 }
 
 
-.buttons{
-    display: flex;
-    justify-content: center;
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2.5rem;
 }
 
 #iniciar {
@@ -70,46 +93,55 @@ body {
   color: black;
 }
 
+.exercicio-item {
+  margin-bottom: 20px;
+  line-height: 2.5;
+
+}
+
 .button {
-    padding: 16px 42px;
-    border-radius: 3px;
-    border: none;
-    box-shadow: 0px 0px 12px -2px rgba(0,0,0,0.5);
-    line-height: 1.25;
-    background: #FC6E51;
-    text-decoration: none;
-    color: white;
-    font-size: 16px;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    position: relative;
-    margin-right: 10px;
-    transition: background-color .6s ease;
-    width: 250px;
-    overflow: hidden;
+  padding: 16px 42px;
+  border-radius: 3px;
+  border: none;
+  box-shadow: 0px 0px 12px -2px rgba(0, 0, 0, 0.5);
+  line-height: 1.25;
+  background: #FC6E51;
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  position: relative;
+  margin-right: 10px;
+  transition: background-color .6s ease;
+  width: 250px;
+  overflow: hidden;
+
+  &:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 50%;
+    left: 50%;
+    top: var(--mouse-y);
+    left: var(--mouse-x);
+    transform-style: flat;
+    transform: translate3d(-50%, -50%, 0);
+    background: rgba(white, .1);
+    border-radius: 100%;
+    transition: width .3s ease, height .3s ease;
+  }
+
+  &:focus,
+  &:hover {
+    background: darken(#FC6E51, 7%);
+  }
+
+  &:active {
     &:after {
-      content: "";
-      position: absolute;
-      width: 0;
-      height: 0;
-      top: 50%;
-      left: 50%;
-      top: var(--mouse-y);
-      left: var(--mouse-x);
-      transform-style: flat;
-      transform: translate3d(-50%,-50%,0);
-      background: rgba(white,.1);
-      border-radius: 100%;
-      transition: width .3s ease, height .3s ease;
-    }
-    &:focus,
-    &:hover {
-        background: darken(#FC6E51,7%);
-    }
-    &:active {
-      &:after {
-        width: 300px;
-        height: 300px;
-      }
+      width: 300px;
+      height: 300px;
     }
   }
+}
