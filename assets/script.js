@@ -1,18 +1,20 @@
 let minutos = 0
 let segundos = 60
-let horas = 0
-let milliseconds = 0;
 let idIntervalo;
 let tempoModorodoPadrao = 25
 let tempoDescansoPadrao = 5
 let digitalContador = document.getElementById('contador')
-const url = 'https://api.api-ninjas.com/v1/exercises?type=stretching'
-const apiKey = 'VA862GwnFzy6f3qr0pXQrg==LOGy16CvMPVjza2R';
+let labelMinuto = document.getElementById('minutos')
+let labelSegundo = document.getElementById('segundos')
+let tempoSelecionado
 let response
+let exercicios = []
 
 
 function iniciarPomodoro() {
-    minutos = tempoModorodoPadrao
+    console.log(tempoSelecionado)
+    minutos = tempoSelecionado
+    console.log(minutos)
     minutos--
     idIntervalo = setInterval(contadorTempo, 1000)
 }
@@ -23,10 +25,10 @@ function pararPomodoro() {
 
 function zerarPomodoro() {
     clearInterval(idIntervalo)
-    digitalContador.innerText = '25:00'
+    labelMinuto.innerText = '00'
+    labelSegundo.innerText = '00'
     minutos = 0
     segundos = 60
-    horas = 0
 }
 
 function contadorTempo() {
@@ -45,43 +47,57 @@ function contadorTempo() {
     }
 }
 
+function configurarTempo() {
+    let divElementosConfigurar = document.querySelector('.config');
+
+    if (divElementosConfigurar.style.display === 'none') {
+        divElementosConfigurar.style.display = 'block';
+    } else {
+        divElementosConfigurar.style.display = 'none';
+    }
+}
+
+function selecionarTempoPomodoro() {
+    let comboTempoPomodoro = document.getElementById('cbTempo').value
+    tempoSelecionado = comboTempoPomodoro
+    labelMinuto.innerText = comboTempoPomodoro
+    labelSegundo.innerText = '00'
+}
+
 function formatarContador(numero) {
     return numero < 10 ? `0${numero}` : numero;
 }
 
 async function pegarExercicios() {
-    // const queryParams = {
-    //     type: 'stretching',
-    // }
+    const url = 'https://api.api-ninjas.com/v1/exercises?type=stretching'
+    const apiKey = 'VA862GwnFzy6f3qr0pXQrg==LOGy16CvMPVjza2R';
 
-    // const queryString = new URLSearchParams(queryParams).toString()
+    const queryParams = {
+        type: 'stretching',
+    }
 
-    // const UrlCompleta = `${apiUrl}?${queryString}`
+    const queryString = new URLSearchParams(queryParams).toString()
 
-    // try {
-    //     resposta = await fetch(UrlCompleta, {
-    //         method: 'GET',
-    //         headers: {
-    //             Authorization: `X-Api-Key ${apiKey}`,
-    //         },
-    //     })
-
-    //     if (resposta.status != 200) {
-    //         throw new Error('Network response was not ok');
-    //     }
-
-    //     console.log(response.json())
-
-    // } catch (error) {
-    //     console.log(error)
-    // }
+    const UrlCompleta = `${apiUrl}?${queryString}`
 
 
     let options = {
         method: 'GET',
-        headers: { 'x-api-key': apiKey }
+        headers: { 'X-Api-key': apiKey }
     }
 
+    try {
+        resposta = await fetch(UrlCompleta, options)
+
+        if (resposta.status != 200) {
+            throw new Error('Network response was not ok');
+        }
+
+        console.log(response.json())
+
+    } catch (error) {
+        console.log(error)
+    }
 
     fetch(url, options)
         .then(res => res.json()) // parse response as JSON

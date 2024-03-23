@@ -11,16 +11,26 @@
 <body>
     <div class="main">
         <div class="digital">
-            <span id="contador">25:00</span>
+            <div class="contador">
+                <span id="minutos"></span>
+                <span id="doisponto">:</span>
+                <span id="segundos"></span>
+            </div>
             <button class="btnConfig" onclick="configurarTempo()">
                 <img src="./assets/img/config.png" alt="Botão de configuração" width="25" height="25">
             </button>
         </div>
 
         <div class="config" style="display: none;">
-            <label>Tempo de Atividade</label>
-            <input type="number"> <span>horas</span>
-            
+            <label for="tempo">Tempo do Pomodoro:</label>
+
+            <select name="tempo" id="cbTempo" onchange="selecionarTempoPomodoro()">
+                <option value="">Seleciono o Tempo</option>
+                <option value="25">25 min</option>
+                <option value="35">35 min</option>
+                <option value="45">45 min</option>
+                <option value="55">55 min</option>
+            </select>
         </div>
 
         <div class="buttons">
@@ -29,7 +39,6 @@
             <button class="button" id="zerar" onclick="zerarPomodoro()">Zerar Tempo</button>
         </div>
     </div>
-
 
     <script src="./assets/script.js"></script>
 </body>

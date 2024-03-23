@@ -39,8 +39,23 @@ body {
     cursor:default;
   }
 
+.contador{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}  
+
+.btnConfig{
+  margin-top: 40px;
+  background-color: Transparent;
+  border: none;
+}
+
 .config{
     display: flex;
+    justify-content: center;
+    flex-direction: column;
     margin-bottom: 25px;
     margin-top: none;
 }
@@ -114,10 +129,4 @@ body {
         height: 300px;
       }
     }
-  }
-
-  .btnConfig{
-    margin-top: 50px;
-    background-color: Transparent;
-    border: none;
   }
