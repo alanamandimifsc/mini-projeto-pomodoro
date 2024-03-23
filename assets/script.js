@@ -98,11 +98,14 @@ function pegarExercicios() {
     fetch(UrlCompleta, options)
         .then(res => res.json()) // parse response as JSON
         .then(data => {
-            console.log(data.name)
-            exercicios = JSON.stringify(data)
+            console.log(data)
+          
+            const exerciciosFiltrados = data.reduce((acc, cur) => {
+                acc.push({ nomeExercicio: cur.name, Instrucao: cur.instructions });
+                return acc;
+            }, []);
             
-
-            console.log(exercicios);
+            console.log(exerciciosFiltrados);
 
         })
         .catch(err => {
