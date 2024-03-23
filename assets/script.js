@@ -1,7 +1,7 @@
 let minutos = 0
 let segundos = 60
 let idIntervalo;
-let tempoPomodoroPadrao = 1
+let tempoPomodoroPadrao = 25
 let tempoDescansoPadrao = 5
 let digitalContador = document.getElementById('contador')
 let labelMinuto = document.getElementById('minutos')
@@ -10,7 +10,8 @@ const comboTempoPomodoro = document.getElementById('cbTempo')
 const btnIniciar = document.getElementById('iniciar')
 let tempoSelecionado
 let response
-let exercicios = []
+let listaExercicios = []
+let count = 0
 
 
 function iniciarPomodoro() {
@@ -22,7 +23,7 @@ function iniciarPomodoro() {
 
     minutos--
     btnIniciar.setAttribute('disabled', 'disabled')
-    idIntervalo = setInterval(contadorTempo, 1000)  
+    idIntervalo = setInterval(contadorTempo, 1000)
 }
 
 function pararPomodoro() {
@@ -41,19 +42,18 @@ function zerarPomodoro() {
 
 function contadorTempo() {
     if (segundos === 0) {
-        minutos--
+        minutos--;
         segundos = 59
     } else {
-        segundos--
+        segundos--;
     }
 
     labelMinuto.innerText = formatarContador(minutos)
     labelSegundo.innerText = formatarContador(segundos)
 
-
-    if (minutos == 0 & segundos == 0) {
-        pegarExercicios()
-        clearInterval(idIntervalo)
+    if (minutos === 0 & segundos === 0) {
+        exibeExercicios();
+        clearInterval(idIntervalo);
     }
 }
 
@@ -77,6 +77,16 @@ function formatarContador(numero) {
     return numero < 10 ? `0${numero}` : numero;
 }
 
+
+function exibeExercicios() {
+    let lista = document.querySelector('#lista-exercicios');
+    let listaExerc = document.createElement('li');
+    listaExerc.classList.add('exercicio-item');
+    listaExerc.innerText = `Name: ${listaExercicios[count].name}\nMuscle: ${listaExercicios[count].muscle}\nDifficulty: ${listaExercicios[count].difficulty}\nInstructions: ${listaExercicios[count].instructions}`;
+    lista.appendChild(listaExerc);
+    count++;
+}
+
 function pegarExercicios() {
     const url = 'https://api.api-ninjas.com/v1/exercises'
     const apiKey = 'VA862GwnFzy6f3qr0pXQrg==LOGy16CvMPVjza2R';
@@ -98,7 +108,7 @@ function pegarExercicios() {
     fetch(UrlCompleta, options)
         .then(res => res.json()) // parse response as JSON
         .then(data => {
-            console.log(data)
+            listaExercicios = data
           
             const exerciciosFiltrados = data.reduce((acc, cur) => {
                 acc.push({ nomeExercicio: cur.name, Instrucao: cur.instructions });
