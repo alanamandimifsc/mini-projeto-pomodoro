@@ -6,7 +6,8 @@ let tempoDescansoPadrao = 5
 let digitalContador = document.getElementById('contador')
 let labelMinuto = document.getElementById('minutos')
 let labelSegundo = document.getElementById('segundos')
-let comboTempoPomodoro = document.getElementById('cbTempo')
+const comboTempoPomodoro = document.getElementById('cbTempo')
+const btnIniciar = document.getElementById('iniciar')
 let tempoSelecionado
 let response
 let exercicios = []
@@ -15,20 +16,22 @@ let exercicios = []
 function iniciarPomodoro() {
     if(tempoSelecionado === undefined){
         minutos = tempoPomodoroPadrao
-        console.log(minutos);
     }else {
         minutos = parseInt(tempoSelecionado)
     }
 
     minutos--
-    idIntervalo = setInterval(contadorTempo, 1000)
+    btnIniciar.setAttribute('disabled', 'disabled')
+    idIntervalo = setInterval(contadorTempo, 1000)  
 }
 
 function pararPomodoro() {
+    btnIniciar.removeAttribute('disabled')
     clearInterval(idIntervalo)
 }
 
 function zerarPomodoro() {
+    btnIniciar.removeAttribute('disabled')
     clearInterval(idIntervalo)
     labelMinuto.innerText = tempoSelecionado != undefined ? tempoSelecionado : tempoPomodoroPadrao
     labelSegundo.innerText = formatarContador('0')
@@ -48,12 +51,6 @@ function contadorTempo() {
     labelSegundo.innerText = formatarContador(segundos)
 
 
-    console.log(typeof minutos);
-    console.log(typeof segundos);
-
-    console.log(minutos);
-    console.log(segundos);
-
     if (minutos == 0 & segundos == 0) {
         pegarExercicios()
         clearInterval(idIntervalo)
@@ -61,7 +58,7 @@ function contadorTempo() {
 }
 
 function configurarTempo() {
-    let divElementosConfigurar = document.querySelector('.config');
+    const divElementosConfigurar = document.querySelector('.config');
 
     if (divElementosConfigurar.style.display === 'none') {
         divElementosConfigurar.style.display = 'block';
@@ -101,7 +98,11 @@ function pegarExercicios() {
     fetch(UrlCompleta, options)
         .then(res => res.json()) // parse response as JSON
         .then(data => {
-            console.log(data)
+            console.log(data.name)
+            exercicios = JSON.stringify(data)
+            
+
+            console.log(exercicios);
 
         })
         .catch(err => {
