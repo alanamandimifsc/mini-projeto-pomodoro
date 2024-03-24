@@ -13,7 +13,6 @@ let offset = 0;
 let listaExercicios = [];
 let count = 0;
 
-
 function iniciarPomodoro() {
     if (tempoSelecionado === undefined) {
         minutos = tempoPomodoroPadrao
@@ -51,7 +50,8 @@ function contadorTempo() {
     labelMinuto.innerText = formatarContador(minutos)
     labelSegundo.innerText = formatarContador(segundos)
 
-    if (minutos === 0 & segundos === 0) {
+    if (minutos === 0 && segundos === 0) {
+        alert('Chegou a Hora de Iniciar um Exercício!')
         exibeExercicios();
         zerarPomodoro();
         clearInterval(idIntervalo);
