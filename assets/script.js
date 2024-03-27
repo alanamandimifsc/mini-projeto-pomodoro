@@ -13,7 +13,6 @@ let offset = 0;
 let listaExercicios = [];
 let count = 0;
 
-
 function iniciarPomodoro() {
     if (tempoSelecionado === undefined) {
         minutos = tempoPomodoroPadrao
@@ -51,7 +50,8 @@ function contadorTempo() {
     labelMinuto.innerText = formatarContador(minutos)
     labelSegundo.innerText = formatarContador(segundos)
 
-    if (minutos === 0 & segundos === 0) {
+    if (minutos === 0 && segundos === 0) {
+        alert('Chegou a Hora de Iniciar um Exercício!')
         exibeExercicios();
         clearInterval(idIntervalo);
     }
@@ -79,7 +79,7 @@ function formatarContador(numero) {
 
 function insereExercicioConcluido() {
 
-    let listaConcluidos = document.querySelector('#historico');
+    let listaConcluidos = document.querySelector('.historico');
     let exercicioConcluido = document.createElement('li');
     exercicioConcluido.innerText = listaExercicios[count - 1].name + '\n';
     exercicioConcluido.style.textDecoration = 'line-through';
@@ -97,7 +97,7 @@ function insereExercicioConcluido() {
 }
 
 function exibeExercicios() {
-    let lista = document.querySelector('#lista-exercicios');
+    let lista = document.querySelector('.lista-exercicios');
     let listaExerc = document.createElement('li');
     listaExerc.classList.add('exercicio-item');
     listaExerc.innerText = `Name: ${listaExercicios[count].name}\nMuscle: ${listaExercicios[count].muscle}\nDifficulty: ${listaExercicios[count].difficulty}\nInstructions: ${listaExercicios[count].instructions}`;
