@@ -144,6 +144,7 @@ list-style-type: none;
 #buttons {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     margin-bottom: 2.5rem;
 }
 

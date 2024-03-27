@@ -53,7 +53,6 @@ function contadorTempo() {
     if (minutos === 0 && segundos === 0) {
         alert('Chegou a Hora de Iniciar um Exercício!')
         exibeExercicios();
-        zerarPomodoro();
         clearInterval(idIntervalo);
     }
 }
