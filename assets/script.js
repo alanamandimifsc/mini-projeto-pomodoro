@@ -138,7 +138,7 @@ function pegarExercicios() {
         count = parseInt(indiceSalvo); // Define o próximo alongamento
     }
     const UrlCompleta = "https://api.api-ninjas.com/v1/exercises?type=stretching&offset=" + offset;
-    const apiKey = 'VA862GwnFzy6f3qr0pXQrg==LOGy16CvMPVjza2R';
+    const apiKey = '';
 
 
     let options = {
