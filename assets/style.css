@@ -2,164 +2,217 @@
 
 html,
 body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  height: 100vh;
-  font-family: 'Rubik', sans-serif;
-  background-color: darkseagreen;
-
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    font-family: 'Rubik', sans-serif;
+    font-size: 18px;
+    background: linear-gradient(120deg, #4caf50, #8bc34a);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
-.atividade {
-  display: none;
-  display: flex;
-  height: 100%;
-  /* margin: 2.5rem; */
+#atividade {
+    text-align: center;
+    height: 65%;
+    width: 40vw;
+    padding: 20px 20px 0 20px;
+    background: #27a736;
+    box-shadow: 0px 0px 5px 5px #308933;
+    color: #ffffff;
+    border-radius: 20px;
+    margin: 20px 20px 0 20px;
+}
+
+.lista-exercicios{
+list-style-type: none;
+}
+
+#atividade>li{
+    font-size: 12px;
+}
+
+.title{
+    color: black;
+}
+    
+#content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 20px;
+}
+
+#historico{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    text-align: center;
+    height: 35%;
+    padding: 20px 20px 0 20px;
+    background: #27a736;
+    box-shadow: 0px 0px 5px 5px #308933;
+    color: #ffffff;
+    border-radius: 20px;
+    margin: 20px 20px;
+}
+
+.historico, li{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 12px;
+    column-fill: balance;
 }
 
 .main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100%;
-
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100vh;
 }
 
-.historico {
-  display: flex;
-  justify-content:center;
- 
- }
-
-.digital{ 
+.digital {
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    color:rgb(253, 253, 253); 
-    font-size:50px; 
-    margin-bottom: 50px;
-    border : 5px solid rgb(82, 156, 86);
-    border-radius:50%;
-    width:200px;
-    height:200px;
-    overflow:hidden;
-    position:relative;
+    background: #27a736;
+    box-shadow: 0px 0px 5px 5px #308933;
+    color: #ffffff;
+    font-size: 50px;
+    margin: 10px auto;
+    border: none;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    cursor:default;
-  }
-
-.contador{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 50px;
-}  
-
-.btnConfig{
-  margin-top: 40px;
-  background-color: Transparent;
-  border: none;
+    cursor: default;
 }
 
-.config{
+.contador {
     display: flex;
     justify-content: center;
-    flex-direction: column;
-    margin-bottom: 25px;
-    margin-top: none;
+    align-items: center;
+    margin-top: 50px;
 }
 
-.digital {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: rgb(253, 253, 253);
-  font-size: 50px;
-  margin: 10px auto;
-  border: 5px solid rgb(82, 156, 86);
-  border-radius: 50%;
-  width: 200px;
-  height: 200px;
-  overflow: hidden;
-  position: relative;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  cursor: default;
+.btnConfig {
+    margin-top: 40px;
+    background-color: transparent;
+    border: none;
 }
 
 .config {
-  display: flex;
-  margin: 25px;
+    margin: 20px 0px 20px 0px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
 }
 
 .config label {
-  margin-right: 3px;
+    margin-right: 3px;
 }
 
 .config input {
-  width: 50px;
+    width: 50px;
 }
 
 .config span {
-  margin-left: 5px;
+    margin-left: 5px;
 }
 
+#cbTempo{
+    border-radius: 5px;
+}
 
-.buttons {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2.5rem;
+#buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
 }
 
 #iniciar {
-  background-color: rgb(147, 245, 147);
+    background-color: #2ecc40;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
 }
 
 #parar {
-  background-color: rgb(248, 248, 160);
-  color: black;
+    background-color: #ffdc00;
+    color: white;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+#zerar {
+    background-color: #ff3860;
+    border-radius: 10px;
+    font-weight: 600;
 }
 
 .exercicio-item {
-  margin-bottom: 20px;
-  line-height: 2.5;
-
+    margin-bottom: 20px;
+    line-height: 2.5;
 }
 
 .button {
-  padding: 16px 42px;
-  border-radius: 3px;
-  border: none;
-  box-shadow: 0px 0px 12px -2px rgba(0, 0, 0, 0.5);
-  line-height: 1.25;
-  background: #FC6E51;
-  text-decoration: none;
-  color: white;
-  font-size: 16px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  position: relative;
-  margin-right: 10px;
-  transition: background-color .6s ease;
-  width: 250px;
-  overflow: hidden;
+    padding: 16px 42px;
+    border-radius: 3px;
+    border: none;
+    box-shadow: 0px 0px 12px -2px rgba(0, 0, 0, 0.5);
+    line-height: 1.25;
+    background: #fc6e51;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    position: relative;
+    margin-right: 10px;
+    transition: background-color .6s ease;
+    width: 200px;
+    overflow: hidden;
+}
 
-  &:after {
+.concluir {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2ecc40; 
+    color: white; 
+    padding: 15px 32px; 
+    height: 32px;
+    font-size: 14px; 
+    margin: 4px 10px; 
+    cursor: pointer; 
+    border-radius: 10px; 
+    border: none;
+    transition-duration: 0.4s;
+}
+
+.concluir:hover {
+    background-color: #45a049;
+}
+
+.button:after {
     content: "";
     position: absolute;
     width: 0;
@@ -170,20 +223,19 @@ body {
     left: var(--mouse-x);
     transform-style: flat;
     transform: translate3d(-50%, -50%, 0);
-    background: rgba(white, .1);
+    background: rgba(255, 255, 255, .1);
     border-radius: 100%;
     transition: width .3s ease, height .3s ease;
-  }
+}
 
-  &:focus,
-  &:hover {
-    background: darken(#FC6E51, 7%);
-  }
+.button:focus,
+.button:hover {
+    background: darken(#fc6e51, 7%);
+}
 
-  &:active {
+.button:active {
     &:after {
-      width: 300px;
-      height: 300px;
+        width: 300px;
+        height: 300px;
     }
-  }
 }

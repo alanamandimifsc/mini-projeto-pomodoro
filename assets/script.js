@@ -12,7 +12,7 @@ let tempoSelecionado;
 let offset = 0;
 let listaExercicios = [];
 let count = 0;
-
+let controlelista = 0;
 
 function iniciarPomodoro() {
     if (tempoSelecionado === undefined) {
@@ -51,7 +51,9 @@ function contadorTempo() {
     labelMinuto.innerText = formatarContador(minutos)
     labelSegundo.innerText = formatarContador(segundos)
 
-    if (minutos === 0 & segundos === 0) {
+    if (minutos === 0 && segundos === 0) {
+        zerarPomodoro();
+        // alert('Chegou a Hora de Iniciar um Exercício!')
         exibeExercicios();
         clearInterval(idIntervalo);
     }
@@ -79,11 +81,22 @@ function formatarContador(numero) {
 
 function insereExercicioConcluido() {
 
-    let listaConcluidos = document.querySelector('#historico');
+    let listaConcluidos = document.querySelector('.historico');
+    if (controlelista === 10) {
+        let value = count - 1;
+        let itemExcluir = document.getElementById(value.toString());
+        if (itemExcluir) {
+            itemExcluir.remove();
+        } else {
+            console.error(`Element with ID ${value} not found.`);
+        }
+    }
     let exercicioConcluido = document.createElement('li');
     exercicioConcluido.innerText = listaExercicios[count - 1].name + '\n';
     exercicioConcluido.style.textDecoration = 'line-through';
     exercicioConcluido.classList.add('exercicio-concluido');
+    let id = count - 1;
+    exercicioConcluido.id = id.toString();
     listaConcluidos.appendChild(exercicioConcluido);
 
     let itemExcluir = document.querySelector('.exercicio-item');
@@ -94,10 +107,14 @@ function insereExercicioConcluido() {
         pegarExercicios();
         count = 0;
     }
+    // Salvar página atual e índice do alongamento no localStorage
+    localStorage.setItem('paginaAtual', offset);
+    localStorage.setItem('indiceAlongamento', count);
+    controlelista++;
 }
 
 function exibeExercicios() {
-    let lista = document.querySelector('#lista-exercicios');
+    let lista = document.querySelector('.lista-exercicios');
     let listaExerc = document.createElement('li');
     listaExerc.classList.add('exercicio-item');
     listaExerc.innerText = `Name: ${listaExercicios[count].name}\nMuscle: ${listaExercicios[count].muscle}\nDifficulty: ${listaExercicios[count].difficulty}\nInstructions: ${listaExercicios[count].instructions}`;
@@ -111,17 +128,17 @@ function exibeExercicios() {
 }
 
 function pegarExercicios() {
-    // const url = 'https://api.api-ninjas.com/v1/exercises'
+
+    const paginaSalva = localStorage.getItem('paginaAtual');
+    const indiceSalvo = localStorage.getItem('indiceAlongamento');
+
+    // Se houver dados salvos, redirecionar para a página e usar o índice
+    if (paginaSalva && indiceSalvo) {
+        offset = parseInt(paginaSalva); // Define a página salva
+        count = parseInt(indiceSalvo); // Define o próximo alongamento
+    }
     const UrlCompleta = "https://api.api-ninjas.com/v1/exercises?type=stretching&offset=" + offset;
     const apiKey = 'VA862GwnFzy6f3qr0pXQrg==LOGy16CvMPVjza2R';
-
-    // const queryParams = {
-    //     type: 'stretching',
-    // }
-
-    // const queryString = new URLSearchParams(queryParams).toString()
-
-    // const UrlCompleta = `${url}?${queryString}`
 
 
     let options = {
@@ -135,13 +152,6 @@ function pegarExercicios() {
         .then(res => res.json()) // parse response as JSON
         .then(data => {
             listaExercicios = data
-
-            const exerciciosFiltrados = data.reduce((acc, cur) => {
-                acc.push({ nomeExercicio: cur.name, Instrucao: cur.instructions });
-                return acc;
-            }, []);
-
-            console.log(exerciciosFiltrados);
 
         })
         .catch(err => {
