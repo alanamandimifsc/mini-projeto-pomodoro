@@ -29,7 +29,7 @@ Um aplicativo de temporizador pomodoro simples com recursos adicionais, como lis
 1. Selecione o tempo do pomodoro no menu suspenso ou use o tempo padrão de 25 minutos.
 2. Clique em "Iniciar" para iniciar o temporizador.
 3. Durante o intervalo, os exercícios serão listados.
-4. Ao concluir um exercício, clique em "Concluir" ao lado do exercício na lista.
+4. Ao concluir um exercício, clique em "Concluir" abaixo do exercício na lista.
 
 ## Licença e Configuração da API
 
