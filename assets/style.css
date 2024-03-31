@@ -1,13 +1,13 @@
-@import url('https://fonts.googleapis.com/css?family=Rubik:500');
+@import url("https://fonts.googleapis.com/css?family=Rubik:500");
 
 html,
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    height: 100%;
+    height: 150%;
     width: 100%;
-    font-family: 'Rubik', sans-serif;
+    font-family: "Rubik", sans-serif;
     font-size: 18px;
     background: linear-gradient(120deg, #4caf50, #8bc34a);
     background-repeat: no-repeat;
@@ -20,52 +20,42 @@ body {
     justify-content: space-around;
 }
 
-#atividade {
+#atividade,
+#historico {
     text-align: center;
-    height: 65%;
-    width: 40vw;
-    padding: 20px 20px 0 20px;
+    width: 45vw;
+    height: auto;
+    padding: 20px;
     background: #27a736;
     box-shadow: 0px 0px 5px 5px #308933;
     color: #ffffff;
     border-radius: 20px;
-    margin: 20px 20px 0 20px;
+    margin: 20px 0px;
 }
 
-.lista-exercicios{
-list-style-type: none;
+.lista-exercicios {
+    list-style: none;
+    text-align: center;
+    }
+
+#atividade > li {
+    
 }
 
-#atividade>li{
-    font-size: 12px;
-}
-
-.title{
+.title {
     color: black;
 }
-    
-#content{
+
+#content {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     border-radius: 20px;
-}
+    }
 
-#historico{
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    text-align: center;
-    height: 35%;
-    padding: 20px 20px 0 20px;
-    background: #27a736;
-    box-shadow: 0px 0px 5px 5px #308933;
-    color: #ffffff;
-    border-radius: 20px;
-    margin: 20px 20px;
-}
-
-.historico, li{
+.historico,
+li {
+list-style: none;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -116,7 +106,7 @@ list-style-type: none;
     margin-top: 40px;
     background-color: transparent;
     border: none;
-}
+    }
 
 .config {
     margin: 20px 0px 20px 0px;
@@ -137,7 +127,7 @@ list-style-type: none;
     margin-left: 5px;
 }
 
-#cbTempo{
+#cbTempo {
     border-radius: 5px;
 }
 
@@ -148,24 +138,37 @@ list-style-type: none;
     margin-bottom: 2.5rem;
 }
 
+#iniciar,
+#parar,
+#zerar {
+    padding: 16px 42px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0px 0px 12px -2px rgba(0, 0, 0, 0.5);
+    line-height: 1.25;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    position: relative;
+    margin-right: 10px;
+    transition: background-color 0.6s ease;
+    width: 200px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
 #iniciar {
     background-color: #2ecc40;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 600;
 }
 
 #parar {
     background-color: #ffdc00;
-    color: white;
-    border-radius: 10px;
-    font-weight: 600;
 }
 
 #zerar {
     background-color: #ff3860;
-    border-radius: 10px;
-    font-weight: 600;
 }
 
 .exercicio-item {
@@ -183,11 +186,11 @@ list-style-type: none;
     text-decoration: none;
     color: white;
     font-size: 16px;
-    letter-spacing: .08em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     position: relative;
     margin-right: 10px;
-    transition: background-color .6s ease;
+    transition: background-color 0.6s ease;
     width: 200px;
     overflow: hidden;
 }
@@ -196,14 +199,14 @@ list-style-type: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #2ecc40; 
-    color: white; 
-    padding: 15px 32px; 
+    background-color: #2ecc40;
+    color: white;
+    padding: 15px 32px;
     height: 32px;
-    font-size: 14px; 
-    margin: 4px 10px; 
-    cursor: pointer; 
-    border-radius: 10px; 
+    font-size: 14px;
+    margin: 4px 10px;
+    cursor: pointer;
+    border-radius: 10px;
     border: none;
     transition-duration: 0.4s;
 }
@@ -223,10 +226,10 @@ list-style-type: none;
     left: var(--mouse-x);
     transform-style: flat;
     transform: translate3d(-50%, -50%, 0);
-    background: rgba(255, 255, 255, .1);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 100%;
-    transition: width .3s ease, height .3s ease;
-}
+    transition: width 0.3s ease, height 0.3s ease;
+    }
 
 .button:focus,
 .button:hover {
@@ -235,7 +238,45 @@ list-style-type: none;
 
 .button:active {
     &:after {
-        width: 300px;
-        height: 300px;
+    width: 300px;
+    height: 300px;
     }
 }
+
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #content {
+        display: flex;
+        justify-content: center;
+        width: 90%;
+    }
+
+    #atividade,
+    #historico {
+        width: 90%;
+    }
+
+    .btnConfig {
+        margin-top: 20px;
+    }
+
+    .config input {
+        width: 30px;
+    }
+
+    .button {
+        width: 150px;
+    }
+
+    #buttons {
+        margin-bottom: 1rem;
+    }
+}
+
+
